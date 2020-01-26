@@ -1,0 +1,42 @@
+#!/bin/bash
+
+RUNNING_PORT=8000
+
+ELASTIC_CONTAINER="elastic"
+
+function usage {
+    cat <<EOF
+Usage:
+  $0 [command]
+
+Available commands:
+  start                     Run application in port 8000
+  test                      Execute unit tests
+EOF
+    exit 1
+}
+
+function unit_test {
+    vendor/bin/phpunit -vvv $*
+}
+
+function run_server {
+    php -S localhost:$RUNNING_PORT -t public
+}
+
+case $1 in
+    "start")
+        run_server
+    ;;
+    "test")
+        unit_test "${@:2}"
+    ;;
+    *)
+        if [ $# -eq 1 ]
+        then
+            $0 | grep $1
+        else
+            usage
+        fi
+   ;;
+esac

@@ -1,0 +1,12 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Calculator\\": "src/",
+            "Calculator\\Tests\\": "tests/unit/suite",
+            "Calculator\\Tests\\Mock\\": "tests/unit/mock"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
